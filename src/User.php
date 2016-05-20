@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Tweet.php';
 class User {
     
     public static function getUserByEmail (mysqli $conn, $email){
@@ -76,6 +76,20 @@ class User {
     public function getActive(){
         return $this->active;
     }
+    public function loadFromDB(mysqli $conn, $id){
+        $sql = "SELECT * FROM User WHERE id = $id";
+        $result = $conn->query($sql);
+        if($result->num_rows ==1) {
+            $rowUser = $reult->fetch_assoc();
+            $this->id = $rowUser['id'];
+            $this->email = $rowUser['email'];
+            $this->password = $rowUser['password'];
+            $this->fullName = $rowUser['full_name'];
+            $this->active = $rowUser['active'];
+        }
+        return false;
+    }
+    
     public function saveToDB(mysqli $conn){
         if($this->id == -1) {
             $sql = "INSERT INTO User (email, password, full_name, active)"
@@ -98,5 +112,9 @@ class User {
                 return false;
             }
         }
+    }
+    public function loadAllTweets(){
+        //echo 
+//odwolac sie do funkcji statycznej w tweet
     }
 }
