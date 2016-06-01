@@ -83,7 +83,7 @@ class Tweet{
         }
     }
     public function getAllComments(mysqli $conn){
-        $sql = "SELECT * FROM Comments WHERE tweet_id = '$this->id'";
+        $sql = "SELECT * FROM Comments WHERE tweet_id = '$this->id' ORDER BY creation_date DESC";
         $result = $conn->query($sql);
         $allComments = [];
         if($result->num_rows > 0){

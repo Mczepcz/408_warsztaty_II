@@ -25,18 +25,20 @@
             
         }
         if($_SERVER['REQUEST_METHOD'] === "POST"){
-        echo 'POST';
-        if(isset($_POST['comment'])){
-            $newComment = new Comment();
-            $newComment->setUserId($_SESSION['loggedUserId']);
-            $newComment->setTweetId($_GET['id']);
-            $newComment->setCreationDate(date('Y-m-d H:i:s'));
-            $newComment->setText($_POST['comment']);
-            $newComment->saveToDB($conn);
+            echo 'POST';
+            if(isset($_POST['comment'])){
+                $newComment = new Comment();
+                $newComment->setUserId($_SESSION['loggedUserId']);
+                $newComment->setTweetId($_GET['id']);
+                $newComment->setCreationDate(date('Y-m-d H:i:s'));
+                $newComment->setText($_POST['comment']);
+                $newComment->saveToDB($conn);
+            }
         }
         
+        
         $tweetComments = $currentTweet->getAllComments($conn);
-}
+
         ?>
         <div>
 
@@ -46,9 +48,10 @@
             <ul>
                 <?php
                 foreach ($tweetComments as $comment){
-                    $author = User::getUserById($conn, $comment[1]);
+                    $authorObject = User::getUserById($conn, $comment[1]);
+                    $author = '<a href="user_page.php?id='.$authorObject['id'].'">'.$authorObject['full_name'].'</a>';
 
-                    echo '<li> #'.$comment[0].' author: '.$author['full_name'].' date: '.$comment[3].' <br/>'.$comment[4].'</li>';
+                    echo '<li> #'.$comment[0].' author: '.$author.' date: '.$comment[3].' <br/>'.$comment[4].'</li>';
                 }
                 ?>
             </ul>

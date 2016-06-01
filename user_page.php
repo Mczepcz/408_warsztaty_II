@@ -30,12 +30,13 @@
             <ul>
             <?php
             foreach ($userTweets as $tweets){
-                echo '<li> #'.$tweets[0].'<br/>'.$tweets[1].'</li>';
+                echo '<li><a href=tweet_page.php?id='.$tweets[0].'> #'.$tweets[0].'</a><br/>'.$tweets[1].'</li>';
             }
             ?>
             </ul>
             
         </div>
+        <a href='index.php'>Main Page</a>
         
         
     </body>
