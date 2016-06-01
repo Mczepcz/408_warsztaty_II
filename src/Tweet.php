@@ -1,8 +1,9 @@
 <?php
 
 class Tweet{
-    public static function showTweet (mysqli $conn, $user_id){
-        $sql = "SELECT * FROM Tweets WHERE id = '$user_id'";
+    
+    public static function showTweet (mysqli $conn, $id){
+        $sql = "SELECT * FROM Tweets WHERE id = '$id'";
         $result = $conn->query($sql);
         if($result->num_rows == 1){
             return $result->fetch_assoc();
@@ -50,7 +51,7 @@ class Tweet{
         $sql = "SELECT * FROM Tweets WHERE id = $id";
         $result = $conn->query($sql);
         if($result->num_rows ==1) {
-            $rowUser = $reult->fetch_assoc();
+            $rowUser = $result->fetch_assoc();
             $this->id = $rowUser['id'];
             $this->user_id = $rowUser['user_id'];
             $this->text = $rowUser['text'];

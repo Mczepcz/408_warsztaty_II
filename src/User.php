@@ -1,5 +1,6 @@
 <?php
-require_once 'Tweet.php';
+
+require_once 'connection.php';
 class User {
     
     public static function getUserByEmail (mysqli $conn, $email){
@@ -44,12 +45,17 @@ class User {
         $this->active = 0;
     
     }
+    
+    public function getId(){
+        return $this->id;
+    }
+    
     public function setEmail($email){
         $this->email = is_string($email) ? trim($email) : $this->email;
         
     }
     
-    public function getEmail($email){
+    public function getEmail(){
         return $this->email;
         
     }
@@ -64,7 +70,7 @@ class User {
     public function setFullName($fullName){
         $this->fullName = is_string($fullName) ? trim($fullName) : $this->fullName;
     }
-    public function getFullName($fullName){
+    public function getFullName(){
        return $this->fullName;
     }
     public function activate(){
@@ -80,7 +86,7 @@ class User {
         $sql = "SELECT * FROM User WHERE id = $id";
         $result = $conn->query($sql);
         if($result->num_rows ==1) {
-            $rowUser = $reult->fetch_assoc();
+            $rowUser = $result->fetch_assoc();
             $this->id = $rowUser['id'];
             $this->email = $rowUser['email'];
             $this->password = $rowUser['password'];
@@ -113,8 +119,19 @@ class User {
             }
         }
     }
-    public function loadAllTweets(){
-        //echo 
-//odwolac sie do funkcji statycznej w tweet
+    public function loadAllTweets(mysqli $conn){
+        $sql = "SELECT * FROM Tweets WHERE user_id = '$this->id'";
+        $result = $conn->query($sql);
+        $allTweets = [];
+        if($result->num_rows > 0){
+            
+            while($row = $result->fetch_assoc()){
+                $allTweets[] = [$row['id'],$row['text']];
+            }
+            return $allTweets;
+        }
+        else{
+            return false;
+        }
     }
 }
