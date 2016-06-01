@@ -14,6 +14,17 @@ class User {
             return false;
         }
     }
+    public static function getUserById (mysqli $conn, $id){
+        $sql = "SELECT * FROM User WHERE id = '$id'";
+        $result = $conn->query($sql);
+        if($result->num_rows == 1){
+            return $result->fetch_assoc();
+            
+        }
+        else{
+            return false;
+        }
+    }
     public static function login (mysqli $conn, $email, $password){
         $sql = "SELECT * FROM User WHERE email='$email'";
         $result = $conn->query($sql);

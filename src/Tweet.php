@@ -1,4 +1,5 @@
 <?php
+require_once 'connection.php';
 
 class Tweet{
     
@@ -51,10 +52,10 @@ class Tweet{
         $sql = "SELECT * FROM Tweets WHERE id = $id";
         $result = $conn->query($sql);
         if($result->num_rows ==1) {
-            $rowUser = $result->fetch_assoc();
-            $this->id = $rowUser['id'];
-            $this->user_id = $rowUser['user_id'];
-            $this->text = $rowUser['text'];
+            $rowTweet = $result->fetch_assoc();
+            $this->id = $rowTweet['id'];
+            $this->user_id = $rowTweet['user_id'];
+            $this->text = $rowTweet['text'];
         }
         return false;
     }
@@ -71,7 +72,7 @@ class Tweet{
             }
         }
         else{
-            $sql = "UPDATE Tweets SET user_id = '{$this->user_id}', text ='{$this->text}', active= {$this->active} WHERE id = {$this->id}";
+            $sql = "UPDATE Tweets SET user_id = '{$this->user_id}', text ='{$this->text}' WHERE id = {$this->id}";
             
             if($conn->query($sql)){
                 return true;
@@ -81,8 +82,20 @@ class Tweet{
             }
         }
     }
-    public function getAllComments(){
-        
+    public function getAllComments(mysqli $conn){
+        $sql = "SELECT * FROM Comments WHERE tweet_id = '$this->id'";
+        $result = $conn->query($sql);
+        $allComments = [];
+        if($result->num_rows > 0){
+            
+            while($row = $result->fetch_assoc()){
+                $allComments[] = [$row['id'],$row['user_id'],$row['tweet_id'],$row['creation_date'],$row['comment_text']];
+            }
+            return $allComments;
+        }
+        else{
+            return false;
+        }
     }
    
 }

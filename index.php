@@ -10,7 +10,7 @@ if(!isset($_SESSION['loggedUserId'])){
     header("Location: login.php");
 }
 if($_SERVER['REQUEST_METHOD'] === "POST"){
-    echo 'POST';
+    
     if(isset($_POST['tweetText'])){
         $newTweet = new Tweet();
         $newTweet->setUserId($_SESSION['loggedUserId']);
