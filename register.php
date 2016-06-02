@@ -25,7 +25,8 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         $newUser->setFullName($fullName);
         $newUser->activate();
         if($newUser->saveToDB($conn)){
-            echo "Registration succesful<br/>";
+            echo "Registration succesful! Please log in<br/>";
+            echo "<a href='login.php'>Login</a>";
         }
         else{
             echo"Error durning registration <br/>";
@@ -61,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             <fieldset>
                 <label>
                     Email:
-                    <input type='text' name='email'/>
+                    <input type='email' name='email'/>
                 </label>
                 <br/>
                 <label>

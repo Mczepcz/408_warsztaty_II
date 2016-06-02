@@ -36,7 +36,15 @@
             </ul>
             
         </div>
-        <a href="send_message.php?id=<?php echo $userId ?>">Send Message</a>
+        <?php
+        if($userId === $_SESSION['loggedUserId']){
+            echo '<a href="edit.php?id='.$userId.'">Edit your profile</a>';
+        }
+        else{
+            echo '<a href="send_message.php?id='.$userId.'">Send Message</a>';
+        }
+        ?>
+      
         <a href='index.php'>Main Page</a>
         
         

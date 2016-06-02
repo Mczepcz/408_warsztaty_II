@@ -50,10 +50,10 @@
                     if(count($allReceived)>0){
                         for($i=0; $i<count($allReceived);$i++){
                             if($allReceived[$i][2]){
-                                echo '<li><a href="linkzgetem"><b>Tytul</b></a></li>';
+                                echo '<li><a href="message_page.php?id='.$allReceived[$i][0].'"><b>'.$allReceived[$i][1].'</b></a></li>';
                             }
                             else{
-                                echo '<li><a href="linkzgetem">Tytul</a></li>';
+                                echo '<li><a href="message_page.php?id='.$allReceived[$i][0].'">'.$allReceived[$i][1].'</a></li>';
                             }
                         }
                     }
@@ -69,12 +69,7 @@
                     <?php
                     if(count($allSent)>0){
                         for($i=0; $i<count($allSent);$i++){
-                            if($allSent[$i][2]){
-                                echo '<li><a href="linkzgetem"><b>Tytul</b></a></li>';
-                            }
-                            else{
-                                echo '<li><a href="linkzgetem">Tytul</a></li>';
-                            }
+                            echo '<li><a href="message_page.php?id='.$allSent[$i][0].'&tag=s">'.$allSent[$i][1].'</a></li>'; 
                         }
                     }
                     else{

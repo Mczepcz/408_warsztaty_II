@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         $newTweet->setUserId($_SESSION['loggedUserId']);
         $newTweet->setText($_POST['tweetText']);
         $newTweet->saveToDB($conn);
+        header("Location: index.php");
     }
 }
 $connectedUser = new User();
@@ -37,8 +38,10 @@ $connectedUserId = $connectedUser->getId();
         <b>Your Entries:</b>
         <ul>
             <?php
-            foreach ($userTweets as $tweets){
-                echo '<li><a href=tweet_page.php?id='.$tweets[0].'> #'.$tweets[0].'</a><br/>'.$tweets[1].'</li>';
+            if($userTweets){
+                foreach ($userTweets as $tweets){
+                    echo '<li><a href=tweet_page.php?id='.$tweets[0].'> #'.$tweets[0].'</a><br/>'.$tweets[1].'</li>';
+                }
             }
             ?>
         </ul>

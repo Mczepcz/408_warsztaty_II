@@ -33,6 +33,7 @@
                 $newComment->setCreationDate(date('Y-m-d H:i:s'));
                 $newComment->setText($_POST['comment']);
                 $newComment->saveToDB($conn);
+                header("Location: tweet_page.php");
             }
         }
         
@@ -47,12 +48,14 @@
             <h4>Comments :</h4>
             <ul>
                 <?php
-                foreach ($tweetComments as $comment){
-                    $authorObject = User::getUserById($conn, $comment[1]);
-                    $author = '<a href="user_page.php?id='.$authorObject['id'].'">'.$authorObject['full_name'].'</a>';
+                if($tweetComments){
+                    foreach ($tweetComments as $comment){
+                        $authorObject = User::getUserById($conn, $comment[1]);
+                        $author = '<a href="user_page.php?id='.$authorObject['id'].'">'.$authorObject['full_name'].'</a>';
 
-                    echo '<li> #'.$comment[0].' author: '.$author.' date: '.$comment[3].' <br/>'.$comment[4].'</li>';
-                }
+                        echo '<li> #'.$comment[0].' author: '.$author.' date: '.$comment[3].' <br/>'.$comment[4].'</li>';
+                    }
+                }    
                 ?>
             </ul>
             <form method='POST'>

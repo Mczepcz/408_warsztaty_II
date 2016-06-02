@@ -4,7 +4,7 @@ require_once 'connection.php';
 class Message {
     
     public static function showMessage (mysqli $conn, $id){
-        $sql = "SELECT * FROM Messages WHERE id = '$id'";
+        $sql = "SELECT Messages . * , User.full_name FROM Messages JOIN User ON Messages.sender_id = User.id WHERE Messages.id = '$id'";
         $result = $conn->query($sql);
         if($result->num_rows == 1){
             return $result->fetch_assoc();
@@ -13,6 +13,15 @@ class Message {
         else{
             return false;
         }
+    }
+    public static function changeIsRead(mysqli $conn, $id){
+        $sql ="UPDATE Messages SET is_read = 0 WHERE id='$id'";
+        if($conn->query($sql)){
+            return true;
+        }
+        else{
+            return false;
+            }
     }
     
     private $id;

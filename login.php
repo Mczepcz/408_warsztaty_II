@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             <fieldset>
                 <label>
                     E-mail
-                    <input type="text" name="email" />
+                    <input type="email" name="email" />
                     
                 </label>
                 <br/>

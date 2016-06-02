@@ -11,7 +11,9 @@
         require_once './src/connection.php';
         require_once './src/Message.php';
         
-        
+        if(!isset($_SESSION['loggedUserId'])){
+            header("Location: login.php");
+        }
         
         
         if($_SERVER["REQUEST_METHOD"]==="POST"){
