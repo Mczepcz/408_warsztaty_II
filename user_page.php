@@ -36,6 +36,7 @@
             </ul>
             
         </div>
+        <a href="send_message.php?id=<?php echo $userId ?>">Send Message</a>
         <a href='index.php'>Main Page</a>
         
         

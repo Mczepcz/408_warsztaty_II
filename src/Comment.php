@@ -11,7 +11,7 @@ class Comment{
         $this->id = -1;
         $this->user_id = 0;
         $this->tweet_id= 0;
-        $this->creation_date= 0;
+        $this->creation_date= "";
         $this->text = "";
     }
     

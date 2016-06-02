@@ -50,6 +50,7 @@ $connectedUserId = $connectedUser->getId();
         <br/>
         <a href="logout.php">Logout</a>
         <a href='allUsers.php'>See others users</a>
+        <a href="messages.php">Post box</a>
 
     </body>
 </html>
