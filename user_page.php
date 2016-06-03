@@ -18,32 +18,34 @@
         }
         if($_SERVER["REQUEST_METHOD"]==="GET"){
             $userId = $_GET["id"];
-            $User = new User();
-            $User->loadFromDB($conn,$userId); 
-            $userTweets = $User->loadAllTweets($conn);
+            $connectedUserId = $_SESSION['loggedUserId'];
+            $user = new User();
+            $user->loadFromDB($conn,$userId); 
+            $userTweets = $user->loadAllTweets($conn);
         }
-        ?>
-        <div>
-            <h3><?php echo $User->getFullName() ?></h3>
-            <p>E-mail: <?php echo $User->getEmail()  ?> </p>
-            <h4>User's entries: </h4>
-            <ul>
-            <?php
+        if($user->getActive()){   
+            echo '<div>';
+            echo '<h3>'.$user->getFullName().'</h3>';
+            echo '<p>E-mail: '.$user->getEmail().'</p>';
+            echo "<h4>User's entries: </h4>";
+            echo '<ul>';
             if($userTweets){
                 foreach ($userTweets as $tweets){
                     echo '<li><a href=tweet_page.php?id='.$tweets[0].'> #'.$tweets[0].'</a><br/>'.$tweets[1].'</li>';
                 }
             }
-            ?>
-            </ul>
-            
-        </div>
-        <?php
-        if($userId === $_SESSION['loggedUserId']){
-            echo '<a href="edit_user.php?id='.$userId.'">Edit your profile</a>';
+            echo'</ul>'; 
+            echo'</div>';
+            if($userId === $_SESSION['loggedUserId']){
+                echo '<a href="edit_user.php?id='.$connectedUserId.'">Edit your profile</a>';
+                echo '<a href="delete_profile.php" > Delete your profile</a>';
+            }
+            else{
+                echo '<a href="send_message.php?id='.$userId.'">Send Message</a>';
+            }
         }
         else{
-            echo '<a href="send_message.php?id='.$userId.'">Send Message</a>';
+            echo "This user has deactivated profile. Until activation any interraction with user will be impossible";
         }
         ?>
       

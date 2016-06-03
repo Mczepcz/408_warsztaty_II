@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <script src='js/app.js'></script>
     </head>
     <body>
         <?php
@@ -33,7 +34,7 @@
                 $newComment->setCreationDate(date('Y-m-d H:i:s'));
                 $newComment->setText($_POST['comment']);
                 $newComment->saveToDB($conn);
-                header("Location: tweet_page.php");
+//                header("Location: tweet_page.php");
             }
         }
         
@@ -45,7 +46,7 @@
 
             <p><?php echo $tweet['text'];?></p>
             <hr/>
-            <h4>Comments :</h4>
+            <h4>Comments (<?php echo count($tweetComments)-1 ?>) :</h4>
             <ul>
                 <?php
                 if($tweetComments){
@@ -60,8 +61,8 @@
             </ul>
             <form method='POST'>
                 <label>Leave a comment:</label><br/>
-                <textarea name='comment' rows ='5' cols='20' maxlength='60' placeholder='Write your comment'></textarea><br/>
-                 <p><span>0<span>/60</p>
+                <textarea id="tweet" name='comment' rows ='5' cols='20' maxlength='60' placeholder='Write your comment'></textarea><br/>
+                 <p><span id="counter">0</span>/60</p>
                 <input type="submit" value='Comment'/>
             </form>
             <br/>

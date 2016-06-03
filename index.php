@@ -6,6 +6,13 @@ require_once './src/User.php';
 require_once './src/Tweet.php';
 require_once './src/connection.php';
 
+function numOfComments($conn, $id){
+    $sql = "SELECT * FROM Comments WHERE tweet_id = '$id'";
+    $result = $conn->query($sql);
+    return $result->num_rows;
+    
+}
+
 if(!isset($_SESSION['loggedUserId'])){
     header("Location: login.php");
 }
@@ -31,6 +38,7 @@ $connectedUserId = $connectedUser->getId();
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <script src='js/app.js'></script>
     </head>
     <body>
         Logged user id =<?php echo $_SESSION['loggedUserId']?><br/>
@@ -40,15 +48,17 @@ $connectedUserId = $connectedUser->getId();
             <?php
             if($userTweets){
                 foreach ($userTweets as $tweets){
-                    echo '<li><a href=tweet_page.php?id='.$tweets[0].'> #'.$tweets[0].'</a><br/>'.$tweets[1].'</li>';
+                    $commNum = numOfComments($conn, $tweets[0]);
+                    
+                    echo '<li><a href=tweet_page.php?id='.$tweets[0].'> #'.$tweets[0].'</a><br/>'.$tweets[1].'<br/>Comments: '.$commNum.'</li>';
                 }
             }
             ?>
         </ul>
         <form method='POST'>
             <label>Your new Entry:</label><br/>
-            <textarea name='tweetText' rows ='10' cols='45' maxlength='140' placeholder='Write your short message'></textarea><br/>
-            <p><span>0<span>/140</p>
+            <textarea id='tweet' name='tweetText' rows ='10' cols='45' maxlength='140' placeholder='Write your short message'></textarea><br/>
+            <p><span id='counter'>0</span>/140</p>
             <input type="submit" value='Tweet'/>
         </form>
         <br/>

@@ -32,14 +32,14 @@
         if($resultReceived->num_rows > 0){
             
             while($rowReceived = $resultReceived->fetch_assoc()){
-                $allReceived[] = [$rowReceived['id'],$rowReceived['title'],$rowReceived['is_read'],$rowReceived['full_name'],$rowReceived['text_message']];
+                $allReceived[] = [$rowReceived['id'],$rowReceived['title'],$rowReceived['is_read'],$rowReceived['full_name'],$rowReceived['text_message'], $rowReceived['sender_id']];
             }
         }
         
         if($resultSent->num_rows > 0){
             
             while($rowSent = $resultSent->fetch_assoc()){
-                 $allSent[] = [$rowSent['id'],$rowSent['title'],$rowSent['is_read'],$rowSent['full_name'],$rowSent['text_message']];
+                 $allSent[] = [$rowSent['id'],$rowSent['title'],$rowSent['is_read'],$rowSent['full_name'],$rowSent['text_message'], $rowSent['receiver_id']];
             }
         }
         ?>
@@ -52,7 +52,9 @@
                         for($i=0; $i<count($allReceived);$i++){
                             if($allReceived[$i][2]){
                                 echo '<li>';
-                                echo '<b>From: </b>'.$allReceived[$i][3].'<br/>';
+                                //'<a href="user_page.php?id='.allReceived[$i][5].'">'.$allReceived[$i][3].'</a>'
+                                echo '<b>From: </b><a href="user_page.php?id='.$allReceived[$i][5].'">'.$allReceived[$i][3].'</a><br/>';
+                                //echo '<b>From: </b>'.$allReceived[$i][3].'<br/>';
                                 echo '<b>Title: </b>';
                                 echo '<a href="message_page.php?id='.$allReceived[$i][0].'"><b>'.$allReceived[$i][1].'</b></a>';
                                 echo '<p><i>'.substr($allReceived[$i][4], 0, 30).'</i></p>';
@@ -60,7 +62,7 @@
                             }
                             else{
                                 echo '<li>';
-                                echo '<b>From: </b>'.$allReceived[$i][3].'<br/>';
+                                echo '<b>From: </b><a href="user_page.php?id='.$allReceived[$i][5].'">'.$allReceived[$i][3].'</a><br/>';
                                 echo '<b>Title: </b>';
                                 echo '<a href="message_page.php?id='.$allReceived[$i][0].'">'.$allReceived[$i][1].'</a>';
                                 echo '<p><i>'.substr($allReceived[$i][4], 0, 30).'</i></p>';
@@ -81,9 +83,9 @@
                     if(count($allSent)>0){
                         for($i=0; $i<count($allSent);$i++){
                             echo '<li>';
-                            echo '<b>To: </b>'.$allSent[$i][3].'<br/>';
+                            echo '<b>To: </b><a href="user_page.php?id='.$allSent[$i][5].'">'.$allSent[$i][3].'</a><br/>';
                             echo '<b>Title: </b>';
-                            echo '<a href="message_page.php?id='.$allSent[$i][0].'">'.$allSent[$i][1].'</a>';
+                            echo '<a href="message_page.php?id='.$allSent[$i][0].'&tag=s">'.$allSent[$i][1].'</a>';
                             echo '<p><i>'.substr($allSent[$i][4], 0, 30).'</i></p>';
                             echo '</li>'; 
                         }

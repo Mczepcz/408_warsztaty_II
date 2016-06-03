@@ -16,17 +16,20 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     
     $user = User::getUserByEmail($conn, $email);
     
-    if ($email && $password && $retypedPassword && $fullName && $password==$retypedPassword && !$user){
+    if ($email && $password && $retypedPassword && $fullName && $password==$retypedPassword && !$user['active']){
         
         
         $newUser = new User();
+        if($user['active']== 0){
+            $newUser->loadFromDB($conn, $user['id']);
+        }
         $newUser->setEmail($email);
         $newUser->setPassword($password, $retypedPassword);
         $newUser->setFullName($fullName);
         $newUser->activate();
         if($newUser->saveToDB($conn)){
             echo "Registration succesful! Please log in<br/>";
-            echo "<a href='login.php'>Login</a>";
+            echo "<a href='login.php'>Login</a>";   
         }
         else{
             echo"Error durning registration <br/>";
@@ -45,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         if(!$fullName){
             echo "Incorrect Full Name <br/>";
         }
-        if($user){
+        if($user && $user['active']){
             echo "Istnieje juz uzytkownik o takim mailu";
         }
     }

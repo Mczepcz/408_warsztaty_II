@@ -33,7 +33,7 @@ class User {
             if(password_verify($password, $rowUser['password']) && $rowUser['active'] == 1){
                 return $rowUser['id'];
             }
-            else{
+            else {
                 return false;
             }
         }
