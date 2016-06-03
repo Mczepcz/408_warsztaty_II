@@ -74,8 +74,8 @@ class User {
         if ($password != $retypedPassword) {
             return false;
         }
-        
-        $this->password = password_hash($password, PASSWORD_BCRYPT);
+
+        $this->password = is_string($password) ? password_hash($password, PASSWORD_BCRYPT) : $this->password ;
         return true;
     }
     public function setFullName($fullName){
@@ -120,7 +120,7 @@ class User {
             }
         }
         else{
-            $sql = "UPDATE User SET email = '{$this->email}', full_name ='{$this->fullName}', active= {$this->active} WHERE id = {$this->id}";
+            $sql = "UPDATE User SET email = '{$this->email}', password='{$this->password}', full_name ='{$this->fullName}', active= {$this->active} WHERE id = {$this->id}";
             
             if($conn->query($sql)){
                 return true;
