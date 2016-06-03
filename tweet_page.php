@@ -61,6 +61,7 @@
             <form method='POST'>
                 <label>Leave a comment:</label><br/>
                 <textarea name='comment' rows ='5' cols='20' maxlength='60' placeholder='Write your comment'></textarea><br/>
+                 <p><span>0<span>/60</p>
                 <input type="submit" value='Comment'/>
             </form>
             <br/>

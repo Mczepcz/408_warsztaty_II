@@ -48,6 +48,7 @@ $connectedUserId = $connectedUser->getId();
         <form method='POST'>
             <label>Your new Entry:</label><br/>
             <textarea name='tweetText' rows ='10' cols='45' maxlength='140' placeholder='Write your short message'></textarea><br/>
+            <p><span>0<span>/140</p>
             <input type="submit" value='Tweet'/>
         </form>
         <br/>
