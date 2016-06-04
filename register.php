@@ -28,8 +28,8 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         $newUser->setFullName($fullName);
         $newUser->activate();
         if($newUser->saveToDB($conn)){
-            echo "Registration succesful! Please log in<br/>";
-            echo "<a href='login.php'>Login</a>";   
+            echo "<p class = 'bg-success'>Registration succesful! Please log in</p><br/>";
+            echo "<a class='btn btn-success' href='login.php'>Login</a>";   
         }
         else{
             echo"Error durning registration <br/>";
@@ -37,19 +37,19 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     }
     else{
         if(!$email){
-            echo "Incorrect e-mail <br/>";
+            echo "<p class='bg-danger'>Incorrect e-mail</p> <br/>";
         }
         if(!$password){
-            echo "Incorrect password <br/>";
+            echo "<p class='bg-danger'>Incorrect password</p> <br/>";
         }
         if(!$retypedPassword || $password != $retypedPassword){
-            echo "Incorrect retyped password <br/>";
+            echo "<p class='bg-danger'>Incorrect retyped password</p> <br/>";
         }
         if(!$fullName){
-            echo "Incorrect Full Name <br/>";
+            echo "<p class='bg-danger'>Incorrect Full Name<p class='bg-danger'</p> <br/>";
         }
         if($user && $user['active']){
-            echo "Istnieje juz uzytkownik o takim mailu";
+            echo "<p class='bg-danger'>This mail is already registered</p>";
         }
     }
 }
@@ -59,32 +59,35 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <form method="POST">
-            <fieldset>
-                <label>
-                    Email:
-                    <input type='email' name='email'/>
-                </label>
-                <br/>
-                <label>
-                    Password:
-                    <input type='password' name='password'/>
-                </label>
-                <br/>
-                <label>
-                    Retype password:
-                    <input type='password' name='retypedPassword'/>
-                </label>
-                <br/>
-                <label>
-                    Full Name:
-                    <input type='text' name='fullName'/>
-                </label>
-                <br/>
-                <input type="submit" value="Register"/>
-            </fieldset>
-        </form>
+        <div class="container">
+            <form method="POST">
+                <fieldset class="form-group" >
+                    <label>
+                        Email:
+                        <input class="form-control" type='email' name='email'/>
+                    </label>
+                    <br/>
+                    <label>
+                        Password:
+                        <input class="form-control"  type='password' name='password'/>
+                    </label>
+                    <br/>
+                    <label>
+                        Retype password:
+                        <input class="form-control"  type='password' name='retypedPassword'/>
+                    </label>
+                    <br/>
+                    <label>
+                        Full Name:
+                        <input class="form-control"  type='text' name='fullName'/>
+                    </label>
+                    <br/>
+                    <input class="btn btn-success" type="submit" value="Register"/>
+                </fieldset>
+            </form>
+        </div>
     </body>
 </html>

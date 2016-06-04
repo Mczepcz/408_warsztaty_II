@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <?php
@@ -43,29 +44,36 @@
             }
         }
         ?>
-        <div>
-            <div>
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href='index.php'>Main Page</a></li>
+            </ul>
+            
+            <div class="row">
                 <h4>Received Messages:</h4>
-                <ul>
+            </div>
+                <ul class="list-group">
                     <?php
                     if(count($allReceived)>0){
                         for($i=0; $i<count($allReceived);$i++){
                             if($allReceived[$i][2]){
-                                echo '<li>';
-                                //'<a href="user_page.php?id='.allReceived[$i][5].'">'.$allReceived[$i][3].'</a>'
+                                echo '<li class="list-group-item">';
+                                echo '<div class="list-group-item-heading">';
                                 echo '<b>From: </b><a href="user_page.php?id='.$allReceived[$i][5].'">'.$allReceived[$i][3].'</a><br/>';
-                                //echo '<b>From: </b>'.$allReceived[$i][3].'<br/>';
                                 echo '<b>Title: </b>';
                                 echo '<a href="message_page.php?id='.$allReceived[$i][0].'"><b>'.$allReceived[$i][1].'</b></a>';
-                                echo '<p><i>'.substr($allReceived[$i][4], 0, 30).'</i></p>';
+                                echo '</div>';
+                                echo '<p class = "list-group-item-text"><i>'.substr($allReceived[$i][4], 0, 30).'</i></p>';
                                 echo '</li>';
                             }
                             else{
-                                echo '<li>';
+                                echo '<li class="list-group-item">';
+                                echo '<div class="list-group-item-heading">';
                                 echo '<b>From: </b><a href="user_page.php?id='.$allReceived[$i][5].'">'.$allReceived[$i][3].'</a><br/>';
                                 echo '<b>Title: </b>';
                                 echo '<a href="message_page.php?id='.$allReceived[$i][0].'">'.$allReceived[$i][1].'</a>';
-                                echo '<p><i>'.substr($allReceived[$i][4], 0, 30).'</i></p>';
+                                echo '</div>';
+                                echo '<p class = "list-group-item-text"><i>'.substr($allReceived[$i][4], 0, 30).'</i></p>';
                                 echo '</li>';
                             }
                         }
@@ -75,18 +83,21 @@
                     }
                     ?>
                 </ul>
-            </div>
-            <div>
+            
+            <div class="row">
                 <h4>Sent Messages:</h4>
-                <ul>
+            </div>
+                <ul class="list-group">
                     <?php
                     if(count($allSent)>0){
                         for($i=0; $i<count($allSent);$i++){
-                            echo '<li>';
+                            echo '<li class="list-group-item">';
+                            echo '<div class="list-group-item-heading">';
                             echo '<b>To: </b><a href="user_page.php?id='.$allSent[$i][5].'">'.$allSent[$i][3].'</a><br/>';
                             echo '<b>Title: </b>';
                             echo '<a href="message_page.php?id='.$allSent[$i][0].'&tag=s">'.$allSent[$i][1].'</a>';
-                            echo '<p><i>'.substr($allSent[$i][4], 0, 30).'</i></p>';
+                            echo '</div>';
+                            echo '<p class = "list-group-item-text"><i>'.substr($allSent[$i][4], 0, 30).'</i></p>';
                             echo '</li>'; 
                         }
                     }
@@ -96,8 +107,8 @@
                     ?>
                 </ul>
                 
-            </div>
+            
         </div>
-        <a href='index.php'>Main Page</a>
+        
     </body>
 </html>

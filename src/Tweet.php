@@ -15,6 +15,13 @@ class Tweet{
         }
     }
     
+    public static function numOfComments($conn, $id){
+        $sql = "SELECT * FROM Comments WHERE tweet_id = '$id'";
+        $result = $conn->query($sql);
+        return $result->num_rows;
+
+    }
+
     
     private $id;
     private $user_id;

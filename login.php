@@ -27,26 +27,30 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <div class="container">
+            <form method="POST">
+                <div class="form-group">
+                    <fieldset>
+                        <label>
+                            E-mail
+                            <input class="form-control" type="email" name="email" />
 
-        <form method="POST">
-            <fieldset>
-                <label>
-                    E-mail
-                    <input type="email" name="email" />
-                    
-                </label>
-                <br/>
-                <label>
-                    Password
-                    <input type="password" name="password" />
-                    
-                </label>
-                <br/>
-                <input type="submit" valu="Sign in"/>
-            </fieldset>
-            <a href="register.php">New user? Sign up now!</a>
-        </form>
+                        </label>
+                        <br/>
+                        <label>
+                            Password
+                            <input class="form-control" type="password" name="password" />
+
+                        </label>
+                        <br/>
+                        <input class="btn btn-primary" type="submit" valu="Sign in"/>
+                    </fieldset>
+                    <h4><a href="register.php">New user? Sign up now!</a></h4>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

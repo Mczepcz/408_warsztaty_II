@@ -3,8 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <div class='container'>
+             <div class="row">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="index.php">Main Page</a></li>
+                </ul>
+            </div>
         <?php
         session_start();
         require_once './src/User.php';
@@ -26,7 +33,9 @@
                 }
             }
             else{
-                echo "This email is already exists";
+                echo "<div class='row'>";
+                echo "<p class = 'bg-danger'>This email is already exists</p>";
+                echo "</div>";
             }
             if(isset($_POST['newName']) && strlen(trim($_POST["newName"]))>0){
               $connectedUser->setFullName($_POST['newName']);  
@@ -37,28 +46,31 @@
             }
             
             if($connectedUser->saveToDB($conn)){
-                echo "Changes was applied";
+                echo "<div class='row'>";
+                echo "<p class='bg-success'>Changes was applied</p>";
+                echo "</div>";
                
             }
             else{
-                echo "Error durning appling";
+                echo "<div class='row'>";
+                echo "<p class = 'bg-danger'>Error durning appling</p>";
+                echo "</div>";
             }
         }
         
         ?>
         <form method="POST">
-            <label>New full name </label>
-            <input type="text" name="newName"/></br>
-            <label>New e-mail</label>
-            <input type="email" name="newEmail"/></br>
-            <label>New password </label>
-            <input type="password" name="newPassword"/></br>
-            <label>Retype password</label>
-            <input type="password" name="retypeNewPassword"/><br/>
-            <input type="submit" value="Submit changes"/>
-            
+            <div class="form-group">
+                <label for="fullName">New full name </label>
+                <input id="fullName" class="form-control" type="text" name="newName"/></br>
+                <label for ="email">New e-mail</label>
+                <input id="email" class="form-control" type="email" name="newEmail"/></br>
+                <label for="pass">New password </label>
+                <input id="pass" class="form-control" type="password" name="newPassword"/></br>
+                <label for="rePass">Retype password</label>
+                <input id="rePass" class="form-control" type="password" name="retypeNewPassword"/><br/>
+                <input class="btn btn-primary" type="submit" value="Submit changes"/>
+            </div>
         </form>
-        
-        <a href='index.php'>Main Page</a>
     </body>
 </html>

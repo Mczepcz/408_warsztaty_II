@@ -6,13 +6,6 @@ require_once './src/User.php';
 require_once './src/Tweet.php';
 require_once './src/connection.php';
 
-function numOfComments($conn, $id){
-    $sql = "SELECT * FROM Comments WHERE tweet_id = '$id'";
-    $result = $conn->query($sql);
-    return $result->num_rows;
-    
-}
-
 if(!isset($_SESSION['loggedUserId'])){
     header("Location: login.php");
 }
@@ -60,7 +53,7 @@ $connectedUserId = $connectedUser->getId();
                 <?php
                 if($userTweets){
                     foreach ($userTweets as $tweets){
-                        $commNum = numOfComments($conn, $tweets[0]);
+                        $commNum = Tweet::numOfComments($conn, $tweets[0]);
 
                         echo '<li class="list-group-item"><a class="list-group-item-heading" href=tweet_page.php?id='.$tweets[0].'> #'.$tweets[0].'</a><p class = "list-group-item-text">'.$tweets[1].'</p><small>Comments: <span class="label label-default">'.$commNum.'</span></small></li>';
                     }
@@ -72,7 +65,7 @@ $connectedUserId = $connectedUser->getId();
                     <label for="tweet">Your new Entry:</label><br/>
                     <textarea class="form-control" id='tweet' name='tweetText' rows ='10' cols='45' maxlength='140' placeholder='Write your short message'></textarea><br/>
                     <p><span id='counter'>0</span>/140</p>
-                    <input type="submit" class="btn btn-primary" value='Tweet'/>
+                    <input type="submit" class="btn btn-primary" value='Enter'/>
                 </div>
             </form>
         </div>
