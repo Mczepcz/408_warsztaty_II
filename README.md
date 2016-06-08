@@ -35,4 +35,7 @@ You can set title and write a text. Clicking on "Post box" you can see your all 
 messages. Unread messages's title are <b> bold </b>. When you opened a message it will be marked as
 read.   
 
+Database:
+
+Database has tables for users, comments, messages and tweets. All have some testing records.
 
