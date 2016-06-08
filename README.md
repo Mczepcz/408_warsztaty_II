@@ -1,4 +1,4 @@
-# Tweeter-like application
+# Twitter-like application
 
 This application is a result of my PHP OOP and MySQL workshops.
 
