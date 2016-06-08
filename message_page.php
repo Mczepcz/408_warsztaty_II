@@ -26,6 +26,10 @@
             $currentMessage = Message::showMessage($conn, $messageId);
             $reciever = User::getUserById($conn, $currentMessage['receiver_id']);
             
+            //This handler test if $_GET has "tag", if so message is marked as read
+            //It's prevent changing message status when user read sent messages, also
+            // user can't reply to himself.
+            
             if(!(isset($_GET['tag']))){
                 Message::changeIsRead($conn, $messageId);
                 $replyButton = "<a class = 'btn btn-primary' href='send_message.php?id=".$currentMessage['sender_id']."'>Reply</a>";

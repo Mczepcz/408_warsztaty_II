@@ -31,7 +31,7 @@ but you are always welcome to leave a comment.
 Messages:
 
 Users can send messages between each other. Message is vary similar to common e-mail.
-You can set title and write a text. Clicking on "Post box" you can see your all sand and delivered 
+You can set title and write a text. Clicking on "Post box" you can see your all sent and delivered 
 messages. Unread messages's title are <b> bold </b>. When you opened a message it will be marked as
 read.   
 
